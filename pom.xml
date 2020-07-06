@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>my-spring-boot</groupId>
+	<artifactId>console-app</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>MySpringBootConsoleApp</name>
+	
+	<properties>
+		<java.version>1.8</java.version>
+		<!-- Sonar-JaCoCo properties -->
+		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+		<sonar.junit.reportPaths>${project.basedir}/target/surefire-reports</sonar.junit.reportPaths>
+		<sonar.jacoco.reportPaths>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPaths>
+	</properties>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.2.RELEASE</version>
+	</parent>
+	
+	<dependencies>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.8</version>
+		</dependency>
+		<!-- Test -->
+		<dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-test</artifactId>
+         <scope>test</scope>
+        </dependency>
+        
+
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <configuration>
+			        <dataFile>${project.basedir}/target/jacoco.exec</dataFile>
+			        <destFile>${project.basedir}/target/jacoco.exec</destFile>
+			        <outputDirectory>${project.basedir}/target/site/jacoco</outputDirectory>
+			    </configuration>
+            	<executions>
+                    <execution>
+                    	<goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                    	<goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+            	</executions>
+        	</plugin>
+		</plugins>
+	</build>
+	<reporting>
+		<plugins>
+        	<plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <configuration>
+			        <dataFile>${project.basedir}/target/jacoco.exec</dataFile>
+			        <destFile>${project.basedir}/target/jacoco.exec</destFile>
+			        <outputDirectory>${project.basedir}/target/site/jacoco</outputDirectory>
+			    </configuration>
+            	<reportSets>
+                    <reportSet>
+                        <reports>
+     	                   <!-- select non-aggregate reports -->
+                            <report>report</report>
+                        </reports>
+                    </reportSet>
+            	</reportSets>
+        	</plugin>
+		</plugins>
+	</reporting>
+</project>
